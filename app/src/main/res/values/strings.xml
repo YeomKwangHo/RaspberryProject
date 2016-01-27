@@ -1,6 +1,23 @@
 <resources>
-    <string name="app_name">RaspberryProject</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">ElectronicProject</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Main Screen-->
+    <string name="Off"> OFF  </string>
+    <string name="On">  ON  </string>
+    <string name="receive_name"> 수신 스위치 </string>
+    <string name="send_name"> 송신 스위치 </string>
+    <string name="receive_btn_name"> Receive </string>
+    <string name="send_btn_name"> Send </string>
+
+    <!-- person Dialog-->
+    <string name="Person_Title">Personal Data Sending</string>
+    <string name="confirm"> 확인 </string>
+    <string name="cancel"> 취소 </string>
+    <string name="person_name"> 이름 </string>
+    <string name="person_age"> 나이 </string>
+
+    <string name="person_sex"> 성별 </string>
+    <string name="person_sex_male"> 남자 </string>
+    <string name="person_sex_female"> 여자 </string>
 </resources>
