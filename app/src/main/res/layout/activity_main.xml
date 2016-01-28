@@ -13,13 +13,13 @@
 
         <TextView
             android:textSize="36sp"
-            android:text="@string/receive_name"
+            android:text="@string/transferSwitch_name"
             android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Switch
-            android:switchMinWidth="100dip"
+            android:switchMinWidth="150dip"
             android:textSize="24sp"
             android:checked="false"
             android:id="@+id/switch_id"

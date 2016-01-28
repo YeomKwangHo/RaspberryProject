@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 
-    // ViewPager »ó¼ö
+    // ViewPager ï¿½ï¿½ï¿½
     private final int Num_Pages = 2;
     private final int ReceivePage = 0;
     private final int SendPage = 1;
@@ -24,13 +24,12 @@ public class MainActivity extends FragmentActivity {
 
     // View
     private Switch mSwitch;
-    private TextView text_title;
     private Button ReceiveButton;
     private Button SendButton;
 
     ViewPager mViewPager;
 
-    // Åë½Å Client ¼³Á¤
+    // ï¿½ï¿½ï¿½ Client ï¿½ï¿½ï¿½ï¿½
     ClientSide SocketClientSide;
 
     Context mContext;
@@ -42,7 +41,6 @@ public class MainActivity extends FragmentActivity {
 
         mContext = this;
 
-        text_title = (TextView)findViewById(R.id.text_title);
         ReceiveButton = (Button)findViewById(R.id.btn_receive);
         SendButton = (Button)findViewById(R.id.btn_send);
 
@@ -50,7 +48,7 @@ public class MainActivity extends FragmentActivity {
         mSwitch.setOnCheckedChangeListener(onCheckedChangeListener);
         mSwitch.setText(getString(R.string.Off));
 
-        // ViewPagerÀ» °Ë»öÇÏ°í Adapter¸¦ ´Þ¾ÆÁÖ°í, Ã¹ÆäÀÌÁö¸¦ ¼±Á¤ÇÑ´Ù.
+        // ViewPagerï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï°ï¿½ Adapterï¿½ï¿½ ï¿½Þ¾ï¿½ï¿½Ö°ï¿½, Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
         mViewPager = (ViewPager)findViewById(R.id.pager);
         mViewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
         mViewPager.setCurrentItem(ReceivePage);
@@ -90,17 +88,13 @@ public class MainActivity extends FragmentActivity {
 
     public void ReceiveClick(View view)
     {
-        text_title.setText(getString(R.string.receive_name));
         mViewPager.setCurrentItem(ReceivePage);
     }
 
     public void SendClick(View view)
     {
-        text_title.setText(getString(R.string.send_name));
         mViewPager.setCurrentItem(SendPage);
     }
-
-
 
     public class pagerAdapter extends FragmentPagerAdapter {
 
@@ -111,7 +105,6 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-
 
             switch(position)
             {

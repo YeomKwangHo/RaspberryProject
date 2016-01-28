@@ -13,7 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 /**
- * Created by ±¤È£ on 2015-12-01.
+ * Created by ï¿½ï¿½È£ on 2015-12-01.
  */
 @SuppressLint("ValidFragment")
 public class SendFragment extends Fragment {
@@ -28,7 +28,6 @@ public class SendFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.sendfragment,container, false);
 
         ListView listView = (ListView)view.findViewById(R.id.send_list);

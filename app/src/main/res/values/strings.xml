@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">ElectronicProject</string>
+    <string name="app_name">RaspberryPiProject</string>
     <string name="action_settings">Settings</string>
 
     <!-- Main Screen-->
     <string name="Off"> OFF  </string>
     <string name="On">  ON  </string>
-    <string name="receive_name"> 수신 스위치 </string>
-    <string name="send_name"> 송신 스위치 </string>
+    <string name="transferSwitch_name"> 스위치 </string>
     <string name="receive_btn_name"> Receive </string>
     <string name="send_btn_name"> Send </string>
 
