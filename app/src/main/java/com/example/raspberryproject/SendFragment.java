@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.example.raspberryproject.send.ListViewAdapter;
 import com.example.raspberryproject.send.ListViewItem;
+import com.example.raspberryproject.send.Person_Data;
 
 import java.util.ArrayList;
 
@@ -32,20 +33,19 @@ public class SendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sendfragment,container, false);
-
         ListView listView = (ListView)view.findViewById(R.id.send_list);
 
         ArrayList<ListViewItem> data = new ArrayList<>();
-        ListViewItem item_personinfo = new ListViewItem("Text");
+        ListViewItem item_personInfo = new ListViewItem("Text");
         ListViewItem item_light = new ListViewItem("Light");
 
-        data.add(item_personinfo);
+        data.add(item_personInfo);
         data.add(item_light);
 
-        ListViewAdapter adapter = new
-                ListViewAdapter(mContext, R.layout.send_listviewlayout, data);
+        ListViewAdapter adapter = new ListViewAdapter(mContext, R.layout.send_listviewlayout, data);
         listView.setAdapter(adapter);
 
         return view;
     }
+
 }

@@ -46,4 +46,6 @@ public class ButtonView extends View {
 
         canvas.drawCircle(100,100,100,paint);
     }
+
+
 }

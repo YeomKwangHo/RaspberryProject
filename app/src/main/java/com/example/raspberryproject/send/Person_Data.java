@@ -14,4 +14,9 @@ public class Person_Data {
         mpersonAge = age;
         mpersonSex = sex;
     }
+
+    public String getPerson()
+    {
+        return mpersonName + " " + mpersonAge + " " + mpersonSex;
+    }
 }

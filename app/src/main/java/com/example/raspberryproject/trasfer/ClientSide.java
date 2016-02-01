@@ -17,13 +17,13 @@ import java.net.Socket;
  * Created by ��ȣ on 2015-12-03.
  */
 public class ClientSide {
-    private String html = "";
+    private String sendData;
     private Handler mHandler;
 
     private Socket mSocket;
     private BufferedReader networkReader;
     private BufferedWriter networkWriter;
-    private String Ip = "112.157.123.197";
+    private String Ip = "122.47.118.149";
     private int Port = 4030;
 
     private Context mContext;
@@ -33,6 +33,13 @@ public class ClientSide {
         mHandler = new Handler();
 
         checkUpdate.start();
+    }
+
+
+    public void sendingData(String sendData)
+    {
+            this.sendData = sendData;
+            Toast.makeText(mContext, "Send Data ~" , Toast.LENGTH_SHORT).show();
     }
 
     private Thread checkUpdate = new Thread(){
@@ -50,23 +57,29 @@ public class ClientSide {
 
               while(true)
               {
+                  if(sendData != null)
+                  {
+                      out.println(sendData);
+                      sendData = null;
+                  }
+
                   if((line = networkReader.readLine()) != null)
                   {
-                      html = line;
-                      mHandler.post(showUpdate);
-                      Log.i("str", line);
+//                      html = line;
+//                      mHandler.post(showUpdate);
+//                      Log.i("str", line);
                   }
               }
           }catch (Exception e){}
       }
     };
 
-    private Runnable showUpdate = new Runnable() {
-        @Override
-        public void run() {
-            Toast.makeText(mContext, "Coming word : " + html, Toast.LENGTH_SHORT).show();
-        }
-    };
+//    private Runnable showUpdate = new Runnable() {
+//        @Override
+//        public void run() {
+//            Toast.makeText(mContext, "Coming word : " + html, Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
     public void setSocket(String mIp, int mPort) throws IOException {
         try {

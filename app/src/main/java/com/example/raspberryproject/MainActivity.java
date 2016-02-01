@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
+import com.example.raspberryproject.send.Person_Data;
 import com.example.raspberryproject.send.Person_Dialog;
 import com.example.raspberryproject.trasfer.ClientSide;
 
@@ -23,6 +24,7 @@ public class MainActivity extends FragmentActivity {
     private final int SendPage = 1;
 
     public Person_Dialog mPerson_Dialog;
+    public Person_Data person_data;
 
     // View
     private Switch mSwitch;
@@ -100,6 +102,8 @@ public class MainActivity extends FragmentActivity {
             return Num_Pages;
         }
     }
+
+
     private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener(){
 
         @Override
@@ -127,7 +131,6 @@ public class MainActivity extends FragmentActivity {
 
         }
     };
-
     private Switch.OnCheckedChangeListener onCheckedChangeListener = new Switch.OnCheckedChangeListener(){
 
         @Override
@@ -143,4 +146,9 @@ public class MainActivity extends FragmentActivity {
             }
         }
     };
+
+    public void sendToServer(String data)
+    {
+        SocketClientSide.sendingData(data);
+    }
 }
