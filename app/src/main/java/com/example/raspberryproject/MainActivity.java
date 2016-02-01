@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
+
+import com.example.raspberryproject.send.Person_Dialog;
+import com.example.raspberryproject.trasfer.ClientSide;
 
 
 public class MainActivity extends FragmentActivity {
@@ -20,7 +22,7 @@ public class MainActivity extends FragmentActivity {
     private final int ReceivePage = 0;
     private final int SendPage = 1;
 
-    Person_Dialog mPerson_Dialog;
+    public Person_Dialog mPerson_Dialog;
 
     // View
     private Switch mSwitch;
@@ -53,33 +55,7 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
         mViewPager.setCurrentItem(ReceivePage);
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                ReceiveButton.setSelected(false);
-                SendButton.setSelected(false);
-
-                switch (position) {
-                    case ReceivePage:
-                        ReceiveButton.setSelected(true);
-                        break;
-
-                    case SendPage:
-                        SendButton.setSelected(true);
-                        break;
-                }
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
+        mViewPager.addOnPageChangeListener(onPageChangeListener);
 
         mPerson_Dialog = new Person_Dialog(mContext);
         mPerson_Dialog.setTitle(getString(R.string.Person_Title));
@@ -90,11 +66,12 @@ public class MainActivity extends FragmentActivity {
     {
         mViewPager.setCurrentItem(ReceivePage);
     }
-
     public void SendClick(View view)
     {
         mViewPager.setCurrentItem(SendPage);
     }
+
+
 
     public class pagerAdapter extends FragmentPagerAdapter {
 
@@ -123,13 +100,38 @@ public class MainActivity extends FragmentActivity {
             return Num_Pages;
         }
     }
+    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener(){
 
+        @Override
+        public void onPageScrolled(int i, float v, int i1) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            ReceiveButton.setSelected(false);
+            SendButton.setSelected(false);
+
+            switch (position) {
+                case ReceivePage:
+                    ReceiveButton.setSelected(true);
+                    break;
+
+                case SendPage:
+                    SendButton.setSelected(true);
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int i) {
+
+        }
+    };
 
     private Switch.OnCheckedChangeListener onCheckedChangeListener = new Switch.OnCheckedChangeListener(){
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
             if(isChecked)
             {
                 mSwitch.setText(getString(R.string.On));

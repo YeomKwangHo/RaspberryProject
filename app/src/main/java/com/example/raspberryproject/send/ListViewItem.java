@@ -1,7 +1,7 @@
-package com.example.raspberryproject;
+package com.example.raspberryproject.send;
 
 /**
- * Created by ±¤È£ on 2015-12-11.
+ * Created by ï¿½ï¿½È£ on 2015-12-11.
  */
 public class ListViewItem {
     private int icon;

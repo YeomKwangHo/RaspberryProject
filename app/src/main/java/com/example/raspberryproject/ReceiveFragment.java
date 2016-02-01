@@ -8,33 +8,28 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.LinearLayout;
+
+import com.example.raspberryproject.receive.ButtonView;
+import com.example.raspberryproject.receive.GridViewAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by ��ȣ on 2015-12-01.
  */
+@SuppressLint("ValidFragment")
 public class ReceiveFragment extends Fragment {
 
     Context context;
-    int[] imageID = new int[]
-            {
-                    R.drawable.btn_1,
-                    R.drawable.btn_1,
-                    R.drawable.btn_1,
-                    R.drawable.btn_1,
-                    R.drawable.btn_1,
-                    R.drawable.btn_1
-            };
-
-    public ReceiveFragment(){}
-
-
+    ArrayList<String> counter;
 
     @SuppressLint("ValidFragment")
     ReceiveFragment(Context mContext)
     {
         this.context = mContext;
+        counter = new ArrayList<>(); counter.add("1"); counter.add("1"); counter.add("1"); counter.add("1");
     }
 
     @Nullable
@@ -43,7 +38,7 @@ public class ReceiveFragment extends Fragment {
         View view = inflater.inflate(R.layout.receivefragment, container, false);
 
         GridView gridView = ((GridView) view.findViewById(R.id.gridView));
-        gridView.setAdapter(new GridViewAdapter(context, imageID));
+        gridView.setAdapter(new GridViewAdapter(context, counter));
 
         return view;
     }

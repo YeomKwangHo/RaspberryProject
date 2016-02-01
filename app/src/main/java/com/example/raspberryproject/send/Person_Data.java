@@ -1,4 +1,4 @@
-package com.example.raspberryproject;
+package com.example.raspberryproject.send;
 
 /**
  * Created by SaBaRaDa on 2016-01-03.

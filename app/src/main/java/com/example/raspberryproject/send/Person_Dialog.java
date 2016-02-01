@@ -1,4 +1,4 @@
-package com.example.raspberryproject;
+package com.example.raspberryproject.send;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import com.example.raspberryproject.R;
 
 /**
  * Created by 광호 on 2015-12-13.

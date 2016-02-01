@@ -1,4 +1,4 @@
-package com.example.raspberryproject;
+package com.example.raspberryproject.trasfer;
 
 import android.content.Context;
 import android.os.Handler;
@@ -14,7 +14,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
- * Created by ±¤È£ on 2015-12-03.
+ * Created by ï¿½ï¿½È£ on 2015-12-03.
  */
 public class ClientSide {
     private String html = "";
@@ -28,7 +28,7 @@ public class ClientSide {
 
     private Context mContext;
 
-    ClientSide(Context mContext) {
+    public ClientSide(Context mContext) {
         this.mContext = mContext;
         mHandler = new Handler();
 

@@ -1,4 +1,4 @@
-package com.example.raspberryproject;
+package com.example.raspberryproject.send;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,10 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.raspberryproject.MainActivity;
+import com.example.raspberryproject.R;
+
 import java.util.ArrayList;
 
 /**
- * Created by ±¤È£ on 2015-12-11.
+ * Created by ï¿½ï¿½È£ on 2015-12-11.
  */
 public class ListViewAdapter extends BaseAdapter {
 

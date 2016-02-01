@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.raspberryproject.send.ListViewAdapter;
+import com.example.raspberryproject.send.ListViewItem;
+
 import java.util.ArrayList;
 
 /**
