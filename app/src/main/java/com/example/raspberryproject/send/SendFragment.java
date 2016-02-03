@@ -1,4 +1,4 @@
-package com.example.raspberryproject;
+package com.example.raspberryproject.send;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.raspberryproject.send.ListViewAdapter;
-import com.example.raspberryproject.send.ListViewItem;
-import com.example.raspberryproject.send.Person_Data;
+import com.example.raspberryproject.R;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ public class SendFragment extends Fragment {
 
     Context mContext;
 
-    SendFragment(Context mContext)
+    public SendFragment(Context mContext)
     {
         this.mContext = mContext;
     }

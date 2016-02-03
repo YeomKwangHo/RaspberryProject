@@ -20,7 +20,6 @@ public class ListViewAdapter extends BaseAdapter {
 
     private final int Text = 0;
     private final int Light = 1;
-    private final int Piano = 2;
 
     boolean Turn_Light = false;
 

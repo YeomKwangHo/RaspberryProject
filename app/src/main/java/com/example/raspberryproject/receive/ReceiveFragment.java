@@ -1,4 +1,4 @@
-package com.example.raspberryproject;
+package com.example.raspberryproject.receive;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.raspberryproject.MainActivity;
+import com.example.raspberryproject.R;
 import com.example.raspberryproject.receive.ButtonView;
 import com.example.raspberryproject.receive.GridViewAdapter;
 
@@ -26,12 +28,15 @@ import java.util.ArrayList;
 public class ReceiveFragment extends Fragment {
 
     Context context;
+    MainActivity mainActivity;
     ArrayList<String> counter;
 
+
     @SuppressLint("ValidFragment")
-    ReceiveFragment(Context mContext)
+    public ReceiveFragment(Context mContext)
     {
         this.context = mContext;
+        this.mainActivity = (MainActivity)mContext;
         counter = new ArrayList<>(); counter.add("1"); counter.add("1"); counter.add("1"); counter.add("1");
     }
 
@@ -51,6 +56,11 @@ public class ReceiveFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
             Toast.makeText(context, "click " + position, Toast.LENGTH_SHORT).show();
+
+            if(position == 0)
+            {
+                mainActivity.sendToServer("2", "Hello");
+            }
         }
     };
 }

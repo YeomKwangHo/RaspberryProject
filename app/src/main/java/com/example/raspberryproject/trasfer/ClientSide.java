@@ -17,7 +17,11 @@ import java.net.Socket;
  * Created by ��ȣ on 2015-12-03.
  */
 public class ClientSide {
+
     private String sendData;
+    private String type;
+    private String line;
+
     private Handler mHandler;
 
     private Socket mSocket;
@@ -30,67 +34,87 @@ public class ClientSide {
 
     public ClientSide(Context mContext) {
         this.mContext = mContext;
+
+        this.line = new String();
+        this.sendData = new String();
+        this.type = new String();
+
         mHandler = new Handler();
-
-        checkUpdate.start();
+        transferThread.start();
     }
 
 
-    public void sendingData(String sendData)
-    {
-            this.sendData = sendData;
-            Toast.makeText(mContext, "Send Data ~" , Toast.LENGTH_SHORT).show();
+    public void sendingData(String type, String sendData) {
+        this.type = type;
+        this.sendData = sendData;
+        Toast.makeText(mContext, sendData, Toast.LENGTH_SHORT).show();
     }
 
-    private Thread checkUpdate = new Thread(){
+    private Thread transferThread = new Thread() {
 
-        public void run()
-      {
-          try{
-              setSocket(Ip, Port);
+        public void run() {
+            try {
+                setSocket(Ip, Port);
+                Log.w("Step : ", "Start Trhead");
+                type = "0";
 
-              String line;
-              Log.w("Step : ", "Start Trhead");
+                PrintWriter out = new PrintWriter(networkWriter, true);
 
-              PrintWriter out = new PrintWriter(networkWriter, true);
-              out.println("Connection Commit");
+                while (true) {
 
-              while(true)
-              {
-                  if(sendData != null)
-                  {
-                      out.println(sendData);
-                      sendData = null;
-                  }
+                    if (type.equals("1")) {
+                        sleep(50);
+                        out.println(type);
 
-                  if((line = networkReader.readLine()) != null)
-                  {
-//                      html = line;
-//                      mHandler.post(showUpdate);
-//                      Log.i("str", line);
-                  }
-              }
-          }catch (Exception e){}
-      }
+                        if (sendData != null) {
+                            out.println(sendData);
+                            sendData = null;
+                        }
+
+                        type = "0";
+                    }
+
+                    else if (type.equals("2")) {
+                        out.println(type);
+
+                        while ((line = networkReader.readLine()) != null) Log.w("in : ", line);
+
+                        //mHandler.post(showUpdate);
+                        type = "0";
+                    }
+
+                }
+
+            } catch (Exception e) {
+            }
+        }
     };
 
-//    private Runnable showUpdate = new Runnable() {
-//        @Override
-//        public void run() {
-//            Toast.makeText(mContext, "Coming word : " + html, Toast.LENGTH_SHORT).show();
-//        }
-//    };
+    private Runnable showUpdate = new Runnable() {
+        @Override
+        public void run() {
+            Toast.makeText(mContext, line, Toast.LENGTH_SHORT).show();
+        }
+    };
 
     public void setSocket(String mIp, int mPort) throws IOException {
         try {
             mSocket = new Socket(mIp, mPort);
             networkReader = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
             networkWriter = new BufferedWriter(new OutputStreamWriter(mSocket.getOutputStream()));
-        }
-
-        catch (IOException e) {
+        } catch (IOException e) {
             Log.i("error : ", "" + e);
             e.printStackTrace();
         }
+    }
+
+    public void close() throws IOException {
+        networkWriter.close();
+        networkReader.close();
+        mSocket.close();
+
+        networkWriter = null;
+        networkReader = null;
+        mSocket = null;
     }
 }

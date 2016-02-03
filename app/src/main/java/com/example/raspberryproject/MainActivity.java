@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.example.raspberryproject.send.Person_Data;
-import com.example.raspberryproject.send.Person_Dialog;
+import com.example.raspberryproject.receive.ReceiveFragment;
+import com.example.raspberryproject.send.PersonDialog;
+import com.example.raspberryproject.send.SendFragment;
 import com.example.raspberryproject.trasfer.ClientSide;
+
+import java.io.IOException;
 
 
 public class MainActivity extends FragmentActivity {
@@ -23,18 +26,19 @@ public class MainActivity extends FragmentActivity {
     private final int ReceivePage = 0;
     private final int SendPage = 1;
 
-    public Person_Dialog mPerson_Dialog;
-    public Person_Data person_data;
+
+    public PersonDialog mPerson_Dialog;
 
     // View
     private Switch mSwitch;
     private Button ReceiveButton;
     private Button SendButton;
+    private boolean oneThread;
 
     ViewPager mViewPager;
 
     // ��� Client ����
-    ClientSide SocketClientSide;
+    ClientSide socketClientSide;
 
     Context mContext;
 
@@ -44,6 +48,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         mContext = this;
+        oneThread = true;
 
         ReceiveButton = (Button)findViewById(R.id.btn_receive);
         SendButton = (Button)findViewById(R.id.btn_send);
@@ -59,7 +64,7 @@ public class MainActivity extends FragmentActivity {
 
         mViewPager.addOnPageChangeListener(onPageChangeListener);
 
-        mPerson_Dialog = new Person_Dialog(mContext);
+        mPerson_Dialog = new PersonDialog(mContext);
         mPerson_Dialog.setTitle(getString(R.string.Person_Title));
         ReceiveButton.setSelected(true);
     }
@@ -131,24 +136,37 @@ public class MainActivity extends FragmentActivity {
 
         }
     };
+
     private Switch.OnCheckedChangeListener onCheckedChangeListener = new Switch.OnCheckedChangeListener(){
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
             if(isChecked)
             {
                 mSwitch.setText(getString(R.string.On));
-                SocketClientSide = new ClientSide(mContext);
+                if(oneThread) socketClientSide = new ClientSide(mContext);
+
+                oneThread = false;
             }
             else{
                 mSwitch.setText(getString(R.string.Off));
-                SocketClientSide = null;
+                try {
+                    if(!oneThread) {
+                        socketClientSide.close();
+                        socketClientSide = null;
+                    }
+                    oneThread = true;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     };
 
-    public void sendToServer(String data)
+    public void sendToServer(String type, String data)
     {
-        SocketClientSide.sendingData(data);
+        if(socketClientSide != null)   socketClientSide.sendingData(type, data);
     }
 }

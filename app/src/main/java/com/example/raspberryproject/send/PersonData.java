@@ -3,9 +3,10 @@ package com.example.raspberryproject.send;
 /**
  * Created by SaBaRaDa on 2016-01-03.
  */
-public class Person_Data {
-    String mpersonName;
+public class PersonData {
+
     int mpersonAge;
+    String mpersonName;
     boolean mpersonSex;
 
     public void setPerson(String name, int age, boolean sex)
