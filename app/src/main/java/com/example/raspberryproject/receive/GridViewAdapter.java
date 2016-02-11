@@ -16,14 +16,13 @@ import java.util.ArrayList;
  */
 public class GridViewAdapter extends BaseAdapter {
 
-    Context context = null;
+    Context mContext;
     ArrayList<String> arrayList;
 
     public GridViewAdapter(Context context, ArrayList<String> arrayList)
     {
-        this.context = context;
+        this.mContext = context;
         this.arrayList = arrayList;
-
     }
 
     @Override
@@ -43,9 +42,7 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-
-        ButtonView buttonView = new ButtonView(context);
-
+        ButtonView buttonView = new ButtonView(mContext);
         return buttonView;
     }
 }

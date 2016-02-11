@@ -10,7 +10,7 @@ public class ListViewItem {
     public int getIcon() { return icon;}
     public String getName() {return name;}
 
-    public ListViewItem( String name)
+    public ListViewItem(String name)
     {
 //        this.icon = icon;
         this.name = name;

@@ -47,7 +47,7 @@ public class ClientSide {
     public void sendingData(String type, String sendData) {
         this.type = type;
         this.sendData = sendData;
-        Toast.makeText(mContext, sendData, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, sendData, Toast.LENGTH_SHORT).show();
     }
 
     private Thread transferThread = new Thread() {
@@ -63,23 +63,20 @@ public class ClientSide {
                 while (true) {
 
                     if (type.equals("1")) {
-                        sleep(50);
                         out.println(type);
+                        sleep(50);
 
                         if (sendData != null) {
                             out.println(sendData);
                             sendData = null;
                         }
-
                         type = "0";
                     }
 
                     else if (type.equals("2")) {
                         out.println(type);
 
-                        while ((line = networkReader.readLine()) != null) Log.w("in : ", line);
-
-                        //mHandler.post(showUpdate);
+                        while ((line = networkReader.readLine()) != null)  Log.i("d", line);//mHandler.post(showUpdate);
                         type = "0";
                     }
 

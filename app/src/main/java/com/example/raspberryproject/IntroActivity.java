@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 /**
- * Created by ±¤È£ on 2015-12-01.
+ * Created by ï¿½ï¿½È£ on 2015-12-01.
  */
 public class IntroActivity extends Activity {
 
@@ -15,14 +15,13 @@ public class IntroActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro_activity);
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(IntroActivity.this, MainActivity.class);
                 startActivity(intent);
 
-                // µÚ·Î°¡±â ÇßÀ»°æ¿ì ¾È³ª¿Àµµ·Ï ¾ø¾ÖÁÖ±â
+                // Activity ì¢…ë£Œ
                 finish();
             }
         }, 2000);

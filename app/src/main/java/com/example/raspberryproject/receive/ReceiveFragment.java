@@ -55,7 +55,6 @@ public class ReceiveFragment extends Fragment {
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            Toast.makeText(context, "click " + position, Toast.LENGTH_SHORT).show();
 
             if(position == 0)
             {

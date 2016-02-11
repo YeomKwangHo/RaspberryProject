@@ -23,7 +23,6 @@ public class PersonDialog extends Dialog {
     private EditText Edit_Person_age;
     private Button Btn_Confirm;
     private Button Btn_Cancel;
-    private RadioButton RBtn_Male;
     private RadioButton RBtn_Female;
 
     public void init(Context context)
@@ -41,7 +40,6 @@ public class PersonDialog extends Dialog {
         Edit_Person_age = (EditText)findViewById(R.id.person_age);
         Btn_Confirm = (Button)findViewById(R.id.btn_confirm);
         Btn_Cancel = (Button)findViewById(R.id.btn_cancel);
-        RBtn_Male = (RadioButton)findViewById(R.id.RBtn_Male);
         RBtn_Female = (RadioButton)findViewById(R.id.RBtn_Female);
     }
 
@@ -54,7 +52,6 @@ public class PersonDialog extends Dialog {
     }
 
     private View.OnClickListener mLeftClickListener = new View.OnClickListener(){
-
         @Override
         public void onClick(View v) {
             person_data.setPerson(Edit_Person_name.getText().toString(), Integer.parseInt(Edit_Person_age.getText().toString()), RBtn_Female.isChecked() ? false : true);

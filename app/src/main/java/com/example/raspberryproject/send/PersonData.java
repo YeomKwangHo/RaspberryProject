@@ -5,19 +5,19 @@ package com.example.raspberryproject.send;
  */
 public class PersonData {
 
-    int mpersonAge;
-    String mpersonName;
-    boolean mpersonSex;
+    private int age;
+    private String name;
+    private boolean sex;
 
     public void setPerson(String name, int age, boolean sex)
     {
-        mpersonName = name;
-        mpersonAge = age;
-        mpersonSex = sex;
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
     }
 
     public String getPerson()
     {
-        return mpersonName + " " + mpersonAge + " " + mpersonSex;
+        return name + " " + age + " " + sex;
     }
 }

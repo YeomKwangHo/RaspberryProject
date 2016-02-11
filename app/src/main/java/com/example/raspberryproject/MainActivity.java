@@ -22,26 +22,25 @@ import java.io.IOException;
 public class MainActivity extends FragmentActivity {
 
     // ViewPager ���
-    private final int Num_Pages = 2;
-    private final int ReceivePage = 0;
-    private final int SendPage = 1;
-
-
-    public PersonDialog mPerson_Dialog;
+    private final int NUM_PAGES = 2;
+    private final int RECEIVE_PAGE = 0;
+    private final int SEND_PAGE = 1;
 
     // View
-    private Switch mSwitch;
-    private Button ReceiveButton;
-    private Button SendButton;
+    private Switch networkSwitch;
+    private Button receiveButton;
+    private Button sendButton;
     private boolean oneThread;
 
     ViewPager mViewPager;
 
     // ��� Client ����
-    ClientSide socketClientSide;
-
+    ClientSide networkClientSide;
     Context mContext;
 
+    // Fragment
+    public SendFragment sendFragment;
+    public ReceiveFragment receiveFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,53 +49,45 @@ public class MainActivity extends FragmentActivity {
         mContext = this;
         oneThread = true;
 
-        ReceiveButton = (Button)findViewById(R.id.btn_receive);
-        SendButton = (Button)findViewById(R.id.btn_send);
+        receiveButton = (Button)findViewById(R.id.btn_receive);
+        sendButton = (Button)findViewById(R.id.btn_send);
 
-        mSwitch = (Switch)findViewById(R.id.switch_id);
-        mSwitch.setOnCheckedChangeListener(onCheckedChangeListener);
-        mSwitch.setText(getString(R.string.Off));
+        networkSwitch = (Switch)findViewById(R.id.switch_id);
+        networkSwitch.setOnCheckedChangeListener(onCheckedChangeListener);
+        networkSwitch.setText(getString(R.string.Off));
 
-        // ViewPager�� �˻��ϰ� Adapter�� �޾��ְ�, ù�������� �����Ѵ�.
+        // ViewPager에 어뎁터 추가!
         mViewPager = (ViewPager)findViewById(R.id.pager);
         mViewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
-        mViewPager.setCurrentItem(ReceivePage);
+        mViewPager.setCurrentItem(RECEIVE_PAGE);
 
         mViewPager.addOnPageChangeListener(onPageChangeListener);
 
-        mPerson_Dialog = new PersonDialog(mContext);
-        mPerson_Dialog.setTitle(getString(R.string.Person_Title));
-        ReceiveButton.setSelected(true);
+        receiveButton.setSelected(true);
     }
 
     public void ReceiveClick(View view)
     {
-        mViewPager.setCurrentItem(ReceivePage);
+        mViewPager.setCurrentItem(RECEIVE_PAGE);
     }
     public void SendClick(View view)
     {
-        mViewPager.setCurrentItem(SendPage);
+        mViewPager.setCurrentItem(SEND_PAGE);
     }
 
-
-
     public class pagerAdapter extends FragmentPagerAdapter {
-
-        pagerAdapter(android.support.v4.app.FragmentManager fm){
-            super(fm);
-
-        }
+        pagerAdapter(android.support.v4.app.FragmentManager fm){super(fm);}
 
         @Override
         public Fragment getItem(int position) {
 
             switch(position)
             {
-                case ReceivePage :
-                    return new ReceiveFragment(mContext);
+                case RECEIVE_PAGE :
+                    return receiveFragment = new ReceiveFragment(mContext);
 
-                case SendPage :
-                    return new SendFragment(mContext);
+                case SEND_PAGE :
+                    return sendFragment = new SendFragment(mContext);
                 default:
                     return null;
             }
@@ -104,7 +95,7 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return Num_Pages;
+            return NUM_PAGES;
         }
     }
 
@@ -117,16 +108,16 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onPageSelected(int position) {
-            ReceiveButton.setSelected(false);
-            SendButton.setSelected(false);
+            receiveButton.setSelected(false);
+            sendButton.setSelected(false);
 
             switch (position) {
-                case ReceivePage:
-                    ReceiveButton.setSelected(true);
+                case RECEIVE_PAGE:
+                    receiveButton.setSelected(true);
                     break;
 
-                case SendPage:
-                    SendButton.setSelected(true);
+                case SEND_PAGE:
+                    sendButton.setSelected(true);
                     break;
             }
         }
@@ -144,17 +135,17 @@ public class MainActivity extends FragmentActivity {
 
             if(isChecked)
             {
-                mSwitch.setText(getString(R.string.On));
-                if(oneThread) socketClientSide = new ClientSide(mContext);
+                networkSwitch.setText(getString(R.string.On));
+                if(oneThread) networkClientSide = new ClientSide(mContext);
 
                 oneThread = false;
             }
             else{
-                mSwitch.setText(getString(R.string.Off));
+                networkSwitch.setText(getString(R.string.Off));
                 try {
                     if(!oneThread) {
-                        socketClientSide.close();
-                        socketClientSide = null;
+                        networkClientSide.close();
+                        networkClientSide = null;
                     }
                     oneThread = true;
 
@@ -167,6 +158,6 @@ public class MainActivity extends FragmentActivity {
 
     public void sendToServer(String type, String data)
     {
-        if(socketClientSide != null)   socketClientSide.sendingData(type, data);
+        if(networkClientSide != null)   networkClientSide.sendingData(type, data);
     }
 }

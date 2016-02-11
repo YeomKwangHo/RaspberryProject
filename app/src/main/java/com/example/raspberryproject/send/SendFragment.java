@@ -20,7 +20,9 @@ import java.util.ArrayList;
 @SuppressLint("ValidFragment")
 public class SendFragment extends Fragment {
 
+    PersonDialog sendInfo;
     Context mContext;
+    ArrayList<ListViewItem> data;
 
     public SendFragment(Context mContext)
     {
@@ -31,19 +33,30 @@ public class SendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sendfragment,container, false);
-        ListView listView = (ListView)view.findViewById(R.id.send_list);
 
-        ArrayList<ListViewItem> data = new ArrayList<>();
-        ListViewItem item_personInfo = new ListViewItem("Text");
-        ListViewItem item_light = new ListViewItem("Light");
-
-        data.add(item_personInfo);
-        data.add(item_light);
-
-        ListViewAdapter adapter = new ListViewAdapter(mContext, R.layout.send_listviewlayout, data);
-        listView.setAdapter(adapter);
+        setListView();                                              // ListView에 담기 윟나 데이터 초기화
+        setDialog();                                                // Text를 보내는 Dialog 초기화
+        setAdapter((ListView) view.findViewById(R.id.send_list));  // ListView 어댑터 갱신
 
         return view;
     }
 
+    public void setListView()
+    {
+        data = new ArrayList<>();
+        ListViewItem item_personInfo = new ListViewItem(this.mContext.getString(R.string.send_personinfo));
+
+        data.add(item_personInfo);
+    }
+
+    public void setDialog()
+    {
+        sendInfo = new PersonDialog(this.mContext);
+        sendInfo.setTitle(this.mContext.getString(R.string.Person_Title));
+    }
+
+    public void setAdapter(ListView listView) {
+        ListViewAdapter adapter = new ListViewAdapter(mContext, R.layout.sendfragment_item, data);
+        listView.setAdapter(adapter);
+    }
 }

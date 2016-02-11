@@ -18,8 +18,7 @@ import java.util.ArrayList;
  */
 public class ListViewAdapter extends BaseAdapter {
 
-    private final int Text = 0;
-    private final int Light = 1;
+    private final int SEND_PERSONINFO = 0;
 
     boolean Turn_Light = false;
 
@@ -33,7 +32,6 @@ public class ListViewAdapter extends BaseAdapter {
         this.inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         this.data = data;
         this.layout = layout;
-
     }
 
     @Override
@@ -56,38 +54,24 @@ public class ListViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(layout, parent, false);
         }
-
         ListViewItem listViewItem = data.get(position);
-
         TextView name = (TextView) convertView.findViewById(R.id.list_textview);
         name.setText(listViewItem.getName());
 
         convertView.setTag(position);
-
         convertView.setOnClickListener(onClickListener);
 
         return convertView;
     }
-
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
             switch ((int) v.getTag()) {
-                case Text:
-                    mainActivity.mPerson_Dialog.show();
+                case SEND_PERSONINFO:
+                    mainActivity.sendFragment.sendInfo.show();
                     break;
-
-                case Light:
-                    if (Turn_Light) {
-                        Toast.makeText(mainActivity, "Turn Off", Toast.LENGTH_SHORT).show();
-                        Turn_Light = false;
-                    }
-                    else {
-                        Toast.makeText(mainActivity, "Turn On", Toast.LENGTH_SHORT).show();
-                        Turn_Light = true;
-                    }break;
             }
 
         }

@@ -8,6 +8,7 @@
     <string name="transferSwitch_name"> 스위치 </string>
     <string name="receive_btn_name"> Receive </string>
     <string name="send_btn_name"> Send </string>
+    <string name="send_personinfo"> Send Person Info </string>
 
     <!-- person Dialog-->
     <string name="Person_Title">Personal Data Sending</string>
